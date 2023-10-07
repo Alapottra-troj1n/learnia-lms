@@ -13,16 +13,16 @@ const NavbarRoutes = () => {
 
 
   return (
-    <div className="flex gap-x-2 ml-auto">
+    <div className="flex items-center gap-x-2 ml-auto">
 
         {isTeacherPage ? (
-            <Link className="flex items-center gap-2 mr-2" href={'/'}>
+            <Link className="flex items-center gap-2 text-sm mr-2" href={'/'}>
                 <LogOut className="h-4 w-4" />
-                Exit
+                <span>Exit</span>
             </Link>
         ): (
             <Link href={'/teacher/courses'} >
-            <Button size={'sm'} className="mr-2" >
+            <Button size={'sm'} variant={'ghost'} className="mr-2" >
                 Teacher Mode
             </Button>
             </Link>
