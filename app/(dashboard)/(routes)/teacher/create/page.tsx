@@ -26,7 +26,6 @@ const formSchema = z.object({
 });
 
 const CreateCoursePage = () => {
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,14 +36,12 @@ const CreateCoursePage = () => {
 
   const { isValid, isSubmitting } = form.formState;
 
-  const onSubmit = async(values: z.infer<typeof formSchema>) => {
-
-    try{
-            const res = await axios.post('/api/course',values);
-            router.push(`/teacher/courses/id`)
-
-    }catch{
-            toast.error('Something went wrong')  
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const res = await axios.post("/api/course", values);
+      router.push(`/teacher/courses/id`);
+    } catch {
+      toast.error("Something went wrong");
     }
     console.log(values);
   };
@@ -57,41 +54,46 @@ const CreateCoursePage = () => {
           What would you like to name your course? Don&apos;t worry, you can
           change this later.
         </p>
-     
-      <Form {...form}>
-        <form className="space-y-8 mt-8" onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    placeholder="e.g Graphic Design Essentials"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  What will you teach him in the course
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="flex items-center gap-x-2">
-            <Link href="/teacher/courses">
-              <Button type="button" variant="ghost">
-                Cancel
+
+        <Form {...form}>
+          <form
+            className="space-y-8 mt-8"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isSubmitting}
+                      placeholder="e.g Graphic Design Essentials"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    What will you teach him in the course
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            
+            <div className="flex items-center gap-x-2">
+              <Link href="/teacher/courses">
+                <Button type="button" variant="ghost">
+                  Cancel
+                </Button>
+              </Link>
+              <Button type="submit" disabled={!isValid || isSubmitting}>
+                Continue
               </Button>
-            </Link>
-            <Button type="submit" disabled={!isValid || isSubmitting}>
-              Continue
-            </Button>
-          </div>
-        </form>
-      </Form>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   );
