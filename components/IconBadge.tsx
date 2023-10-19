@@ -32,6 +32,7 @@ const iconVariants = cva("", {
       default: "h-8 w-8",
       sm: "h-4 w-4",
     },
+  
     
   },
   defaultVariants: {
@@ -47,7 +48,7 @@ interface IconBadgeProps extends BackgroundVariantsProps, IconVariantsProps {
   icon: LucideIcon;
 }
 
-const IconBadge = ({ icon: Icon, variant, size }: IconBadgeProps) => {
+const IconBadge = ({ icon: Icon, variant, size}: IconBadgeProps) => {
   return (
     <div className={cn(backgroundVariants({ variant, size }))}>
       <Icon className={cn(iconVariants({ variant, size }))} />
