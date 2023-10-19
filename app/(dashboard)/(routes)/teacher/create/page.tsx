@@ -26,12 +26,14 @@ const formSchema = z.object({
 });
 
 const CreateCoursePage = () => {
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
     },
   });
+
   const router = useRouter();
 
   const { isValid, isSubmitting } = form.formState;
@@ -39,7 +41,8 @@ const CreateCoursePage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res = await axios.post("/api/courses", values);
-      router.push(`/teacher/courses/id`);
+      router.push(`/teacher/courses/${res.data.id}`);
+      toast.success('Course has been created')
     } catch {
       toast.error("Something went wrong");
     }
